@@ -7,7 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Noto+Sans+Lao:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
+<link rel="icon" type="image/png" href="Img/LOGO/LOGO copy.png">
+
+  <style>
   :root{
     --red-900:#5c0d16;
     --red-700:#8a1220;
@@ -168,9 +170,42 @@
 
   /* ===== section ===== */
   .section{max-width:1200px;margin:0 auto;padding:8px 24px 64px;}
-  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:8px;}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
   .section-head h2{font-size:26px;margin:0;}
   .section-head .count{color:var(--ink-soft);font-size:13px;}
+
+  .toolbar{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  .search-box{
+    position:relative;flex:1 1 220px;max-width:320px;
+  }
+  .search-box input{
+    width:100%;padding:9px 34px 9px 14px;border-radius:999px;
+    border:1.5px solid var(--line-strong);background:var(--card);color:var(--ink);
+    font-size:13px;outline:none;
+  }
+  .search-box input:focus{border-color:var(--red-600);}
+  .search-box .clear-btn{
+    position:absolute;right:6px;top:50%;transform:translateY(-50%);
+    width:22px;height:22px;border-radius:50%;border:none;background:transparent;
+    color:var(--ink-soft);font-size:14px;display:none;align-items:center;justify-content:center;
+  }
+  .search-box.has-value .clear-btn{display:flex;}
+  .sort-select{
+    padding:9px 14px;border-radius:999px;border:1.5px solid var(--line-strong);
+    background:var(--card);color:var(--ink);font-size:13px;font-weight:600;
+  }
+  .month-header{
+    grid-column:1/-1;
+    display:flex;align-items:center;gap:10px;
+    margin:6px 0 -4px;
+    font-family:'Anton','Noto Sans Thai','Noto Sans Lao',sans-serif;
+    letter-spacing:.5px;font-size:15px;color:var(--red-600);
+  }
+  .month-header::after{content:"";flex:1;height:2px;background:var(--line);}
+  .no-results{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:40px 0;font-size:14px;}
 
   .grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;
@@ -292,9 +327,57 @@
   .footer-address strong{color:var(--ink);font-size:13px;letter-spacing:.3px;}
 
   @media (max-width:640px){
-    .hero{padding-top:32px;}
+    .topbar{padding:12px 16px 6px;gap:10px;}
+    .logo-mark{width:34px;height:34px;font-size:16px;}
+    .logo-text .en{font-size:18px;}
+    .logo-text .sub{font-size:10px;}
+    .lang-switch button{padding:5px 9px;font-size:11px;}
+    .theme-toggle{width:32px;height:32px;font-size:14px;}
+
+    nav.rail{padding:10px 0 0;}
+    nav.rail::before{left:16px;right:16px;}
+    .rail-items{
+      flex-wrap:nowrap;overflow-x:auto;
+      padding:0 16px;
+      scrollbar-width:none;-ms-overflow-style:none;
+    }
+    .rail-items::-webkit-scrollbar{display:none;}
+    .tag-tab{
+      padding:8px 13px 11px;font-size:12.5px;
+      white-space:nowrap;flex:0 0 auto;
+    }
+
+    .hero{padding-top:32px;padding-left:16px;padding-right:16px;}
     .hero-swatch{display:none;}
-    footer{flex-direction:column;}
+    .hero h1{font-size:clamp(28px,8vw,38px);}
+
+    .section{padding-left:16px;padding-right:16px;}
+    .section-head h2{font-size:20px;}
+    .toolbar{gap:8px;}
+    .search-box{flex:1 1 100%;max-width:none;}
+    .sort-select{flex:1 1 100%;}
+
+    .grid{grid-template-columns:repeat(2,1fr);gap:12px;}
+    .card{padding:10px 10px 12px;border-radius:12px;}
+    .card-art{margin-top:6px;margin-bottom:10px;}
+    .card h3{font-size:13px;margin:0 0 4px;}
+    .card .code{font-size:10px;padding:2px 8px;margin-bottom:6px;}
+    .card .meta{font-size:11px;line-height:1.5;}
+    .card .price{font-size:12.5px;margin-top:6px;}
+    .card .view-btn{font-size:11px;padding:7px;margin-top:8px;}
+    .month-header{font-size:13px;margin:2px 0 -2px;}
+
+    .modal{padding:18px;}
+    .modal-top{gap:14px;}
+    .modal-art{flex:0 0 130px;height:130px;}
+
+    .float-contact{bottom:16px;right:16px;gap:8px;}
+    .float-contact a{width:42px;height:42px;font-size:17px;}
+
+    footer{flex-direction:column;padding:22px 16px;}
+  }
+  @media (min-width:481px) and (max-width:640px){
+    .grid{grid-template-columns:repeat(3,1fr);}
   }
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important;}
@@ -335,17 +418,28 @@
     <p data-i18n="heroDesc">ເລືອກແບບເສື້ອທີ່ໃຊ່ ເບິ່ງລາຍລະອຽດຄໍເສື້ອ ແຂນເສື້ອ ແລະ ບ່າໄຫຼ່ ແລ້ວທັກຫາພວກເຮົາເພື່ອສັ່ງພິມໄດ້ທັນທີ</p>
     <div class="hero-cta">
       <a class="btn primary" href="#catalog" id="ctaBrowse" data-i18n="ctaBrowse">ເບິ່ງສິນຄ້າທັງໝົດ</a>
-      <a class="btn ghost" id="heroWa" target="_blank">ADDMIN1</a>
-      <a class="btn ghost" id="heroWa2" target="_blank">ADDMIN2</a>
+      <a class="btn ghost" id="heroWa" target="_blank" data-i18n="ctaWaShort">ADDMIN1</a>
     </div>
   </div>
-  <div class="hero-swatch"><div class="tag display">AP‑0001</div></div>
+  <div class="hero-swatch"><div class="tag display">
+    <img src="Img/THUMB/ORDER/Team Jersey/M26-5004 V2 copy.jpg" alt="" width="280" height="280" loading="eager" fetchpriority="high" decoding="async" onerror="if(!this.dataset.fb){this.dataset.fb='1';this.src='Img/ORDER/Team Jersey/M26-5004 V2 copy.jpg';}">
+  </div></div>
 </section>
 
 <section class="section" id="catalog">
   <div class="section-head">
     <h2 id="catTitle">ທັງໝົດ</h2>
     <span class="count" id="catCount"></span>
+  </div>
+  <div class="toolbar">
+    <div class="search-box" id="searchBox">
+      <input type="text" id="searchInput" autocomplete="off">
+      <button class="clear-btn" id="searchClear" aria-label="Clear">✕</button>
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="newest">ใหม่สุด</option>
+      <option value="oldest">เก่าสุด</option>
+    </select>
   </div>
   <div class="grid" id="productGrid"></div>
 </section>
@@ -364,9 +458,8 @@
       <tbody id="specBody"></tbody>
     </table>
     <div class="modal-actions">
-      <a class="btn wa" id="modalWa" target="_blank">📱 <span>ADDMIN1</span></a>
-      <a class="btn wa" id="modalWa2" target="_blank">📞 <span>ADDMIN2</span></a>
-      <a class="btn fb" id="modalFb" target="_blank">📘 <span data-i18n="ctaFbShort">ທັກຜ່ານ Facebook</span></a>
+      <a class="btn wa" id="modalWa" target="_blank"><span data-i18n="ctaWaShort">ADDMIN1</span></a>
+      <a class="btn fb" id="modalFb" target="_blank"><span data-i18n="ctaFbShort">ທັກຜ່ານ Facebook</span></a>
     </div>
   </div>
 </div>
@@ -378,11 +471,8 @@
 </div>
 
 <div class="float-contact">
-  <a class="wa" id="floatWa" target="_blank" aria-label="WhatsApp 1">
+  <a class="wa" id="floatWa" target="_blank" aria-label="WhatsApp">
     <img src="Img/Icon/wa1.svg">
-  </a>
-  <a class="wa" id="floatWa2" target="_blank" aria-label="WhatsApp 2">
-    <img src="Img/Icon/wa2.svg">
   </a>
   <a class="fb" id="floatFb" target="_blank" aria-label="Facebook">
     <img src="Img/Icon/fb.svg">
@@ -404,7 +494,6 @@
 /* ---------- CONFIG: แก้ลิงก์ติดต่อจริงตรงนี้ ---------- */
 const CONTACT = {
   whatsapp: "https://wa.me/8562078891672",
-  whatsapp2: "https://wa.me/8562051923510",
   facebook: "https://www.facebook.com/profile.php?id=61589133735977",
   address: "Vientiane, Laos"
 };
@@ -433,8 +522,13 @@ const I18N = {
     itemsCount:"รายการ",
     logoSub:"ร้านออกแบบและผลิตเสื้อพิมพ์ลาย",
     footerAddress:"ที่อยู่ร้าน",
-    ctaWa2Short:"สั่งผ่าน WhatsApp (เบอร์ 2)",
-    cats:{all:"ทั้งหมด",team:"เสื้อทีมงาน",sport:"เสื้อกีฬา",screen:"เสื้อสกรีน",pants:"กางเกง",sticker:"สติกเกอร์",fabric:"เนื้อผ้า"}
+    cats:{all:"ทั้งหมด",team:"เสื้อทีมงาน",sport:"เสื้อกีฬา",screen:"เสื้อสกรีน",pants:"กางเกง",sticker:"สติกเกอร์",fabric:"เนื้อผ้า"},
+    searchPlaceholder:"ค้นหาด้วยรหัสสินค้า...",
+    sortNewest:"ใหม่สุด",
+    sortOldest:"เก่าสุด",
+    otherMonth:"อื่นๆ",
+    noResults:"ไม่พบสินค้าที่ค้นหา",
+    monthNames:["","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม"]
   },
   la:{
     eyebrow:"ອອກແບບ ແລະ ຜະລິດເສື້ອພິມລາຍ",
@@ -458,8 +552,13 @@ const I18N = {
     itemsCount:"ລາຍການ",
     logoSub:"ເສື້ອພິມລາຍ",
     footerAddress:"ທີ່ຢູ່ຮ້ານ",
-    ctaWa2Short:"ສັ່ງຜ່ານ WhatsApp (ເບີ 2)",
-    cats:{all:"ທັງໝົດ",team:"ເສື້ອທີມງານ",sport:"ເສື້ອກິລາ",screen:"ເສື້ອສະກິນ",pants:"ໂສ້ງ",sticker:"ສະຕິກເກີ້",fabric:"ຜ້າ"}
+    cats:{all:"ທັງໝົດ",team:"ເສື້ອທີມງານ",sport:"ເສື້ອກິລາ",screen:"ເສື້ອສະກິນ",pants:"ໂສ້ງ",sticker:"ສະຕິກເກີ້",fabric:"ຜ້າ"},
+    searchPlaceholder:"ຄົ້ນຫາດ້ວຍລະຫັດສິນຄ້າ...",
+    sortNewest:"ໃໝ່ສຸດ",
+    sortOldest:"ເກົ່າສຸດ",
+    otherMonth:"ອື່ນໆ",
+    noResults:"ບໍ່ພົບສິນຄ້າທີ່ຄົ້ນຫາ",
+    monthNames:["","ມັງກອນ","ກຸມພາ","ມີນາ","ເມສາ","ພຶດສະພາ","ມິຖຸນາ","ກໍລະກົດ","ສິງຫາ","ກັນຍາ","ຕຸລາ","ພະຈິກ","ທັນວາ"]
   },
   en:{
     eyebrow:"Custom Shirt Design & Print Studio",
@@ -483,8 +582,13 @@ const I18N = {
     itemsCount:"items",
     logoSub:"Custom Print Shirts",
     footerAddress:"Shop address",
-    ctaWa2Short:"Order via WhatsApp (line 2)",
-    cats:{all:"All",team:"Team Shirts",sport:"Sport Shirts",screen:"Screen Print",pants:"Pants",sticker:"Sticker",fabric:"Fabric"}
+    cats:{all:"All",team:"Team Shirts",sport:"Sport Shirts",screen:"Screen Print",pants:"Pants",sticker:"Sticker",fabric:"Fabric"},
+    searchPlaceholder:"Search by order code...",
+    sortNewest:"Newest first",
+    sortOldest:"Oldest first",
+    otherMonth:"Others",
+    noResults:"No matching products",
+    monthNames:["","January","February","March","April","May","June","July","August","September","October","November","December"]
   }
 };
 
@@ -515,7 +619,7 @@ const TERMS = {
   },
   fabricType:{
     cotton:{th:"ผ้าคอตตอน",la:"ຜ້າຝ້າຍ",en:"Cotton"},
-    micro:{th:"ผ้าไมโคร",la:"ຜ້າໄມໂຄ",en:"Micro"},
+    micro:{th:"ผ้าไมโคร",la:"ຜ້າໄມໂຄ",en:"Micro",img:"Img/Texture/micro.jpeg"},
     drytech:{th:"ผ้าดรายเท็ค",la:"ຜ້າດາຍເທັກ",en:"Drytech"},
     ricepattern:{th:"ผ้าเม็ดข้าวสาร",la:"ຜ້າເມັດເຂົ້າສານ",en:"Rice Pattern"},
     wiremesh:{th:"ผ้าตาข่ายเหล็ก",la:"ຜ້າຕາລາງເຫຼັກ",en:"Wire mesh"},
@@ -526,30 +630,94 @@ const TERMS = {
 
 /* @ADMIN:NAME_TR:START */
 const NAME_TR = {
-  t1:{th:"เสื้อยูนิฟอร์มบริษัท",la:"ເສື້ອຢູນິຟອມບໍລິສັດ",en:"Corporate Uniform Polo"},
-  t2:{th:"เสื้อสตาฟงานอีเวนต์",la:"ເສື້ອສະຕາຟງານອີເວັນ",en:"Event Staff Tee"},
-  t3:{th:"เสื้อประจำแผนก",la:"ເສື້ອປະຈຳພະແນກ",en:"Department Tee"},
-  t4:{th:"เสื้อครบรอบบริษัท",la:"ເສື້ອຄົບຮອບບໍລິສັດ",en:"Company Anniversary Tee"},
-  s1:{th:"เสื้อฟุตบอลทีม",la:"ເສື້ອບານເຕະທີມ",en:"Football Team Jersey"},
-  s2:{th:"เสื้อวิ่งมาราธอน",la:"ເສື້ອແລ່ນມາຣາທອນ",en:"Running Tee"},
-  s3:{th:"เสื้อกล้ามบาสเกตบอล",la:"ເສື້ອກ້າມບານບ້ວງ",en:"Basketball Tank"},
-  s4:{th:"เสื้อทีมอีสปอร์ต",la:"ເສື້ອທີມອີສະປອດ",en:"E-sport Jersey"},
-  p1:{th:"เสื้อสกรีนลายทั่วไป",la:"ເສື້ອສະກຣີນລາຍທົ່ວໄປ",en:"Custom Print Tee"},
-  p2:{th:"เสื้อคู่ / ครอบครัว",la:"ເສື້ອຄູ່ / ຄອບຄົວ",en:"Couple / Family Tee"},
-  p3:{th:"เสื้อโอเวอร์ไซส์สตรีท",la:"ເສື້ອໂອເວີໄຊສະຕຣີດ",en:"Oversize Streetwear Tee"},
-  p4:{th:"เสื้อคอตตอนพรีเมียม",la:"ເສື້ອຝ້າຍພຣີເມຍມ",en:"Premium Cotton Tee"},
-  g1:{th:"กางเกงวอร์มทีม",la:"ໂສ້ງອົບອຸ່ນທີມ",en:"Team Warm-up Pants"},
-  g2:{th:"กางเกงขาสั้นกีฬา",la:"ໂສ້ງຂາສັ້ນກິລາ",en:"Sport Shorts"},
-  g3:{th:"กางเกงยีนส์สกรีนลาย",la:"ໂສ້ງຢີນສະກຣີນລາຍ",en:"Printed Denim Pants"},
-  g4:{th:"กางเกงจ็อกเกอร์",la:"ໂສ້ງຈ໊ອກເກີ",en:"Jogger Pants"},
-  f1:{th:"ผ้าคอตตอน 100%",la:"ຜ້າຝ້າຍ 100%",en:"100% Cotton Fabric"},
-  f2:{th:"ผ้าโพลีเอสเตอร์ TK",la:"ຜ້າໂພລີເອສເຕີ TK",en:"TK Polyester Fabric"},
-  f3:{th:"ผ้าตาข่ายกีฬา",la:"ຜ້າຕາໜ່າງກິລາ",en:"Sport Mesh Fabric"},
-  f4:{th:"ผ้าคอตตอนพรีเมียม",la:"ຜ້າຝ້າຍພຣີເມຍມ",en:"Premium Cotton Fabric"},
-  st1:{th:"สติกเกอร์โลโก้",la:"ສະຕິກເກີ້ໂລໂກ້",en:"Logo Sticker"},
-  st2:{th:"สติกเกอร์กันน้ำ",la:"ສະຕິກເກີ້ກັນນ້ຳ",en:"Waterproof Sticker"},
-  st3:{th:"สติกเกอร์ไดคัท",la:"ສະຕິກເກີ້ໄດຄັດ",en:"Die-cut Sticker"},
-  st4:{th:"สติกเกอร์ติดรถ",la:"ສະຕິກເກີ້ຕິດລົດ",en:"Vehicle Decal Sticker"}
+  t1:{th:"ທີມງານ6ລໍ້ພາລວຍ",la:"ທີມງານ6ລໍ້ພາລວຍ",en:"ທີມງານ6ລໍ້ພາລວຍ"},
+  t2:{th:"ທີມງານ6ລໍ້ພາລວຍ",la:"ທີມງານ6ລໍ້ພາລວຍ",en:"ທີມງານ6ລໍ້ພາລວຍ"},
+  t3:{th:"ທີມງານ6ລໍ້ພາລວຍ",la:"ທີມງານ6ລໍ້ພາລວຍ",en:"ທີມງານ6ລໍ້ພາລວຍ"},
+  t4:{th:"พันธมิตรODX",la:"พันธมิตรODX",en:"พันธมิตรODX"},
+  t5:{th:"No name",la:"No name",en:"No name"},
+  t6:{th:"No name",la:"No name",en:"No name"},
+  t7:{th:"No name",la:"No name",en:"No name"},
+  t8:{th:"วัยรุ่นเมืองเหนือ",la:"วัยรุ่นเมืองเหนือ",en:"วัยรุ่นเมืองเหนือ"},
+  t9:{th:"LOUK KHN JON",la:"LOUK KHN JON",en:"LOUK KHN JON"},
+  t10:{th:"LOUK KHN JON",la:"LOUK KHN JON",en:"LOUK KHN JON"},
+  t11:{th:"ทีมงานยักษ์ใหญ่",la:"ทีมงานยักษ์ใหญ่",en:"ทีมงานยักษ์ใหญ่"},
+  t12:{th:"ทีมงานยักษ์ใหญ่",la:"ทีมงานยักษ์ใหญ่",en:"ทีมงานยักษ์ใหญ่"},
+  t13:{th:"เฮงชวยรวยบางวัน",la:"เฮงชวยรวยบางวัน",en:"เฮงชวยรวยบางวัน"},
+  t14:{th:"W100",la:"W100",en:"W100"},
+  t15:{th:"W100",la:"W100",en:"W100"},
+  t16:{th:"เฉาก๊วยZOY3",la:"เฉาก๊วยZOY3",en:"เฉาก๊วยZOY3"},
+  t17:{th:"ทีมงานสิงห์น้อยนำโชค",la:"ทีมงานสิงห์น้อยนำโชค",en:"ทีมงานสิงห์น้อยนำโชค"},
+  t18:{th:"BLACKພາລຸຍ",la:"BLACKພາລຸຍ",en:"BLACKພາລຸຍ"},
+  t19:{th:"BLACKພາລຸຍ",la:"BLACKພາລຸຍ",en:"BLACKພາລຸຍ"},
+  t20:{th:"BLACKພາລຸຍ",la:"BLACKພາລຸຍ",en:"BLACKພາລຸຍ"},
+  t21:{th:"ທີມງານບ້ານໂນນຫິນແຮ່",la:"ທີມງານບ້ານໂນນຫິນແຮ່",en:"ທີມງານບ້ານໂນນຫິນແຮ່"},
+  t22:{th:"VTK 369",la:"VTK 369",en:"VTK 369"},
+  t23:{th:"VTK 369",la:"VTK 369",en:"VTK 369"},
+  t24:{th:"VTK 369",la:"VTK 369",en:"VTK 369"},
+  t25:{th:"VTK 369",la:"VTK 369",en:"VTK 369"},
+  t26:{th:"THE ONE",la:"THE ONE",en:"THE ONE"},
+  t27:{th:"ທີມງານ6ລໍ້ພີ່ບັງ",la:"ທີມງານ6ລໍ້ພີ່ບັງ",en:"ທີມງານ6ລໍ້ພີ່ບັງ"},
+  t28:{th:"สามเสี่ยวพาลุย",la:"สามเสี่ยวพาลุย",en:"อ"},
+  t29:{th:"เอเย่นน้อย ร้อยคดี",la:"เอเย่นน้อย ร้อยคดี",en:"เอเย่นน้อย ร้อยคดี"},
+  t30:{th:"เอเย่นน้อยร้อยคดี",la:"เอเย่นน้อยร้อยคดี",en:"เอเย่นน้อยร้อยคดี"},
+  t31:{th:"ทีมงานLLYอินทรีเขียว",la:"ทีมงานLLYอินทรีเขียว",en:"อ"},
+  t32:{th:"ทีมงานLLYอินทรีเขียว",la:"ทีมงานLLYอินทรีเขียว",en:"ทีมงานLLYอินทรีเขียว"},
+  t33:{th:"S.R.P.L",la:"S.R.P.L",en:"S.R.P.L"},
+  t34:{th:"ใจปลากัด",la:"ใจปลากัด",en:"ใจปลากัด"},
+  t35:{th:"ใจปลากัด",la:"ใจปลากัด",en:"ใจปลากัด"},
+  t36:{th:"จิกโก๋หลัก3",la:"จิกโก๋หลัก3",en:"จิกโก๋หลัก3"},
+  t37:{th:"ບຸນຈັນບໍລິການ",la:"ບຸນຈັນບໍລິການ",en:"ອ"},
+  t38:{th:"ສອງພໍ່ລູກຂົນສົ່ງ",la:"ສອງພໍ່ລູກຂົນສົ່ງ",en:"ສອງພໍ່ລູກຂົນສົ່ງ"},
+  t39:{th:"ສອງພໍ່ລູກຂົນສົ່ງ",la:"ສອງພໍ່ລູກຂົນສົ່ງ",en:"ສອງພໍ່ລູກຂົນສົ່ງ"},
+  t40:{th:"ສອງພໍ່ລູກຂົນສົ່ງ",la:"ສອງພໍ່ລູກຂົນສົ່ງ",en:"ສອງພໍ່ລູກຂົນສົ່ງ"},
+  t41:{th:"ສອງພໍ່ລູກຂົນສົ່ງ",la:"ສອງພໍ່ລູກຂົນສົ່ງ",en:"ສອງພໍ່ລູກຂົນສົ່ງ"},
+  t42:{th:"HM FAMILY",la:"HM FAMILY",en:"HM FAMILY"},
+  t43:{th:"HM FAMILY",la:"HM FAMILY",en:"HM FAMILY"},
+  t44:{th:"ทีเด็ดน้ำกวนนอนแจ้ง",la:"ทีเด็ดน้ำกวนนอนแจ้ง",en:"ทีเด็ดน้ำกวนนอนแจ้ง"},
+  t45:{th:"ອານຸສິດສາຂາແບງຫຼວງ",la:"ອານຸສິດສາຂາແບງຫຼວງ",en:"ອານຸສິດສາຂາແບງຫຼວງ"},
+  t46:{th:"จัดไปไฟกระพับ",la:"จัดไปไฟกระพับ",en:"จัดไปไฟกระพับ"},
+  t47:{th:"ທີມງານຫວານຄໍເມືອງແບງ",la:"ທີມງານຫວານຄໍເມືອງແບງ",en:"ທີມງານຫວານຄໍເມືອງແບງ"},
+  t48:{th:"ທີມງານຫວານຄໍເມືອງແບງ",la:"ທີມງານຫວານຄໍເມືອງແບງ",en:"ທີມງານຫວານຄໍເມືອງແບງ"},
+  t49:{th:"ทีมงานMM Family",la:"ทีมงานMM Family",en:"ทีมงานMM Family"},
+  t50:{th:"ຊ່າງໄຟໄກບ້ານ",la:"ຊ່າງໄຟໄກບ້ານ",en:"ຊ່າງໄຟໄກບ້ານ"},
+  t51:{th:"ຊ່າງໄຟໄກບ້ານ",la:"ຊ່າງໄຟໄກບ້ານ",en:"ຊ່າງໄຟໄກບ້ານ"},
+  t52:{th:"ທີມງານງັດຫາດ",la:"ທີມງານງັດຫາດ",en:"ທີມງານງັດຫາດ"},
+  t53:{th:"ທີມງານຊົງເອ",la:"ທີມງານຊົງເອ",en:"ທີມງານຊົງເອ"},
+  t54:{th:"ຟາລິດາກາເດັ່ນ",la:"ຟາລິດາກາເດັ່ນ",en:"ຟາລິດາກາເດັ່ນ"},
+  t55:{th:"ໄວລຸ້ນອຸດົມໄຊ",la:"ໄວລຸ້ນອຸດົມໄຊ",en:"ໄວລຸ້ນອຸດົມໄຊ"},
+  t57:{th:"ມສ ທ່າເຮືອ",la:"ມສ ທ່າເຮືອ",en:"ມສ ທ່າເຮືອ"},
+  t58:{th:"ทีมงานพี่น้อย",la:"ทีมงานพี่น้อย",en:"ทีมงานพี่น้อย"},
+  s1:{th:"NONGXANGPHUEK X NONGKAINGUANG",la:"NONGXANGPHUEK X NONGKAINGUANG",en:"NONGXANGPHUEK X NONGKAINGUANG"},
+  s2:{th:"LION X BEN10",la:"LION X BEN10",en:"LION X BEN10"},
+  s3:{th:"LION X BEN0",la:"LION X BEN0",en:"LION X BEN0"},
+  s4:{th:"LION X BEN10",la:"LION X BEN10",en:"LION X BEN10"},
+  s5:{th:"LION X BEN10",la:"LION X BEN10",en:"LION X BEN10"},
+  s6:{th:"PSL FC",la:"PSL FC",en:"PSL FC"},
+  s7:{th:"ALPHAPRINT",la:"ALPHAPRINT",en:"ALPHAPRINT"},
+  t50:{th:"ຊ່າງໄຟໄກບ້ານ",la:"ຊ່າງໄຟໄກບ້ານ",en:"ຊ່າງໄຟໄກບ້ານ"},
+  t57:{th:"ມສ ທ່າເຮືອ",la:"ມສ ທ່າເຮືອ",en:"ມສ ທ່າເຮືອ"},
+  t58:{th:"ทีมงานพี่น้อย",la:"ทีมงานพี่น้อย",en:"ทีมงานพี่น้อย"},
+  t59:{th:"LJ SPORT",la:"LJ SPORT",en:"LJ SPORT"},
+  s8:{th:"LJ SPORT",la:"LJ SPORT",en:"LJ SPORT"},
+  s9:{th:"KM67 SCHOOL",la:"KM67 SCHOOL",en:"KM67 SCHOOL"},
+  s10:{th:"CHOMTHANANSY",la:"CHOMTHANANSY",en:"CHOMTHANANSY"},
+  p1:{th:"THE ONE",la:"THE ONE",en:"THE ONE"},
+  p2:{th:"THE ONE",la:"THE ONE",en:"THE ONE"},
+  p3:{th:"GTA VI",la:"GTA VI",en:"GTA VI"},
+  g1:{th:"NONGXANGPHUEK X NONGKAINGUANG",la:"NONGXANGPHUEK X NONGKAINGUANG",en:"NONGXANGPHUEK X NONGKAINGUANG"},
+  g2:{th:"เอเย่นน้อยร้อยคดี",la:"เอเย่นน้อยร้อยคดี",en:"เอเย่นน้อยร้อยคดี"},
+  st1:{th:"No name",la:"No name",en:"No name"},
+  st2:{th:"ມາເຟຍເປັດນ້ອຍ",la:"ມາເຟຍເປັດນ້ອຍ",en:"ມາເຟຍເປັດນ້ອຍ"},
+  st3:{th:"ทีมเสือไร้พ่าย",la:"ทีมเสือไร้พ่าย",en:"ทีมเสือไร้พ่าย"},
+  st4:{th:"เต้นรถอาบัง",la:"เต้นรถอาบัง",en:"อ"},
+  st5:{th:"ชุ้มไก่อ้ายฟาน",la:"ชุ้มไก่อ้ายฟาน",en:"ชุ้มไก่อ้ายฟาน"},
+  st6:{th:"ช่างอนัน",la:"ช่างอนัน",en:"ช่างอนัน"},
+  f1:{th:"ไมโคร",la:"ໄມໂຄ",en:"Micro"},
+  f2:{th:"ผ้าสาลี",la:"ຜ້າສາລີ",en:"Corn pattern"},
+  f3:{th:"ผ้าดรายเท็ค",la:"ຜ້າດາຍເທັກ",en:"Dry tech"},
+  f4:{th:"ผ้ารังผึ้ง",la:"ຜ້າຮັງເຜິ່ງ",en:"Honey pattern"},
+  f5:{th:"ผ้าเม็ดข้าวสาร",la:"ຜ້າເມັດເຂົ້າສານ",en:"Rice pattern"},
+  f6:{th:"ผ้าตารางเหล็ก",la:"ຜ້າຕາລາງເຫຼັກ",en:"Wire mesh"}
 };
 /* @ADMIN:NAME_TR:END */
 
@@ -558,36 +726,108 @@ const NAME_TR = {
    - ใช้ไฟล์ในเครื่อง เช่น "Img/products/AP-T001.jpg" (วางไฟล์ไว้ในโฟลเดอร์ Img/products/)
    - หรือใช้ลิงก์ URL เต็ม เช่น "https://example.com/photo.jpg"
    ถ้าไม่ใส่ img (เว้นว่างไว้ "") หรือโหลดรูปไม่สำเร็จ ระบบจะกลับไปแสดงไอคอนเสื้อ SVG แทนอัตโนมัติ
+
+   *** สำคัญ: รูปพรีวิวในหน้าร้าน (การ์ดสินค้า) จะโหลดจากโฟลเดอร์ Img/THUMB/ ก่อนเสมอ
+   (ขนาดไม่เกิน 1000x1000px เพื่อให้โหลดหน้าเว็บเร็วขึ้น) โดยใช้ path เดียวกับรูปเต็ม
+   เช่นถ้ารูปเต็มคือ "Img/ORDER/Team Jersey/M26-5004 copy.jpg"
+   ให้วางไฟล์รูปย่อไว้ที่ "Img/THUMB/ORDER/Team Jersey/M26-5004 copy.jpg"
+   รูปเต็มจะถูกโหลดก็ต่อเมื่อลูกค้ากดปุ่ม "ดูรายละเอียด" เท่านั้น
+   ใช้สคริปต์ make_thumbnails.py ที่แนบมาเพื่อสร้างไฟล์ในโฟลเดอร์ Img/THUMB/ ให้อัตโนมัติ
+   ถ้ายังไม่มีไฟล์ thumbnail ระบบจะโหลดรูปเต็มแทนอัตโนมัติ (เว็บจะโหลดช้ากว่าเดิม แต่ยังใช้งานได้ปกติ)
 ------------------------------------ */
 /* ---------- ราคาสินค้า ----------
    แก้ตัวเลขราคาให้ตรงกับร้านจริง (หน่วยเป็นกีบ ₭) — สำหรับ ผ้า ราคาจะแสดงเป็น "เริ่มต้น" อัตโนมัติ
 ------------------------------------ */
 /* @ADMIN:PRODUCTS:START */
 const PRODUCTS = [
-  {id:"t1",cat:"team",code:"AP-T001",collar:"polo",sleeve:"short",shoulder:"normal",price:65000,img:""},
-  {id:"t2",cat:"team",code:"AP-T002",collar:"round",sleeve:"short",shoulder:"normal",price:55000,img:""},
-  {id:"t3",cat:"team",code:"AP-T003",collar:"round",sleeve:"long",shoulder:"normal",price:70000,img:""},
-  {id:"t4",cat:"team",code:"AP-T004",collar:"vneck",sleeve:"short",shoulder:"drop",price:75000,img:""},
-  {id:"s1",cat:"sport",code:"AP-S001",collar:"round",sleeve:"short",shoulder:"raglan",price:80000,img:""},
-  {id:"s2",cat:"sport",code:"AP-S002",collar:"round",sleeve:"sleeveless",shoulder:"normal",price:60000,img:""},
-  {id:"s3",cat:"sport",code:"AP-S003",collar:"round",sleeve:"sleeveless",shoulder:"drop",price:60000,img:""},
-  {id:"s4",cat:"sport",code:"AP-S004",collar:"polo",sleeve:"short",shoulder:"raglan",price:85000,img:""},
-  {id:"p1",cat:"screen",code:"AP-P001",collar:"round",sleeve:"short",shoulder:"normal",price:50000,img:""},
-  {id:"p2",cat:"screen",code:"AP-P002",collar:"round",sleeve:"short",shoulder:"normal",price:95000,img:""},
-  {id:"p3",cat:"screen",code:"AP-P003",collar:"round",sleeve:"long",shoulder:"drop",price:100000,img:""},
-  {id:"p4",cat:"screen",code:"AP-P004",collar:"vneck",sleeve:"short",shoulder:"normal",price:90000,img:""},
-  {id:"g1",cat:"pants",code:"AP-G001",leg:"long",price:95000,img:""},
-  {id:"g2",cat:"pants",code:"AP-G002",leg:"short",price:60000,img:""},
-  {id:"g3",cat:"pants",code:"AP-G003",leg:"long",price:150000,img:""},
-  {id:"g4",cat:"pants",code:"AP-G004",leg:"long",price:110000,img:""},
-  {id:"f1",cat:"fabric",code:"AP-F001",price:30000,img:""},
-  {id:"f2",cat:"fabric",code:"AP-F002",price:22000,img:""},
-  {id:"f3",cat:"fabric",code:"AP-F003",price:25000,img:""},
-  {id:"f4",cat:"fabric",code:"AP-F004",price:38000,img:""},
-  {id:"st1",cat:"sticker",code:"AP-ST001",price:5000,img:""},
-  {id:"st2",cat:"sticker",code:"AP-ST002",price:8000,img:""},
-  {id:"st3",cat:"sticker",code:"AP-ST003",price:10000,img:""},
-  {id:"st4",cat:"sticker",code:"AP-ST004",price:15000,img:""}
+  {id:"t1",cat:"team",code:"M26-5004",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5004 copy.jpg"},
+  {id:"t2",cat:"team",code:"M26-5004",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5004 V2 copy.jpg"},
+  {id:"t3",cat:"team",code:"M26-5004",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5004 V3 copy.jpg"},
+  {id:"t4",cat:"team",code:"M26-5005",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Team Jersey/M26-5005 copy.jpg"},
+  {id:"t5",cat:"team",code:"M26-5006",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Team Jersey/M26-5006 copy.jpg"},
+  {id:"t6",cat:"team",code:"M26-5007",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Team Jersey/M26-5007 copy.jpg"},
+  {id:"t7",cat:"team",code:"M26-5010",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5010 copy.jpg"},
+  {id:"t8",cat:"team",code:"M26-5011",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5011 copy.jpg"},
+  {id:"t9",cat:"team",code:"M26-5012",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5012 copy.jpg"},
+  {id:"t10",cat:"team",code:"M26-5012",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5012 V2 copy.jpg"},
+  {id:"t11",cat:"team",code:"M26-5023",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5023 copy.jpg"},
+  {id:"t12",cat:"team",code:"M26-5023",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5023 V2 copy.jpg"},
+  {id:"t13",cat:"team",code:"M26-5024",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5024 copy.jpg"},
+  {id:"t14",cat:"team",code:"M26-5026",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5026 copy.jpg"},
+  {id:"t15",cat:"team",code:"M26-5026",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5026 V2 copy.jpg"},
+  {id:"t16",cat:"team",code:"M26-5027",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5027 copy.jpg"},
+  {id:"t17",cat:"team",code:"M26-5028",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-5028 copy.jpg"},
+  {id:"t18",cat:"team",code:"M26-5029",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5029 copy.jpg"},
+  {id:"t19",cat:"team",code:"M26-5029",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5029 V2 copy.jpg"},
+  {id:"t20",cat:"team",code:"M26-5029",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-5029 V3 copy.jpg"},
+  {id:"t21",cat:"team",code:"M26-6005",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6005 copy.jpg"},
+  {id:"t22",cat:"team",code:"M26-6010",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-6010 copy.jpg"},
+  {id:"t23",cat:"team",code:"M26-6010",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6010 V2 copy.jpg"},
+  {id:"t24",cat:"team",code:"M26-6010",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6010 V5 copy.jpg"},
+  {id:"t25",cat:"team",code:"M26-6010",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-6010 V6 copy.jpg"},
+  {id:"t26",cat:"team",code:"M262-6012",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6012 copy.jpg"},
+  {id:"t27",cat:"team",code:"M26-6013",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-6013 copy.jpg"},
+  {id:"t28",cat:"team",code:"M26-6023",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6023 copy.jpg"},
+  {id:"t29",cat:"team",code:"M26-6024",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Team Jersey/M26-6024 copy.jpg"},
+  {id:"t30",cat:"team",code:"M26-6024",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-6024 V2 copy.jpg"},
+  {id:"t31",cat:"team",code:"M26-7001",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7001 copy.jpg"},
+  {id:"t32",cat:"team",code:"M26-7001",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-7001 V2 copy.jpg"},
+  {id:"t33",cat:"team",code:"M26-7002",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7002 copy.jpg"},
+  {id:"t34",cat:"team",code:"M26-7003",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7003 copy.jpg"},
+  {id:"t35",cat:"team",code:"M26-7003",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-7003 V2 copy.jpg"},
+  {id:"t36",cat:"team",code:"M26-7004",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7004 copy.jpg"},
+  {id:"t37",cat:"team",code:"M26-7005",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7005 copy.jpg"},
+  {id:"t38",cat:"team",code:"M26-7006",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7006 copy.jpg"},
+  {id:"t39",cat:"team",code:"M26-7006",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7006 V2 copy.jpg"},
+  {id:"t40",cat:"team",code:"M26-7006",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7006 V3 copy.jpg"},
+  {id:"t41",cat:"team",code:"M26-7006",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7006 V4 copy.jpg"},
+  {id:"t42",cat:"team",code:"M26-7007",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7007 copy.jpg"},
+  {id:"t43",cat:"team",code:"M26-7007",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7007 V2 copy.jpg"},
+  {id:"t44",cat:"team",code:"M26-7009",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7009 copy.jpg"},
+  {id:"t45",cat:"team",code:"M26-7010",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7010 copy.jpg"},
+  {id:"t46",cat:"team",code:"M26-7011",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Team Jersey/M26-7011 copy.jpg"},
+  {id:"t47",cat:"team",code:"M26-7012",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-7012 copy.jpg"},
+  {id:"t48",cat:"team",code:"M26-7012",collar:"round",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-7012 V2 copy.jpg"},
+  {id:"t49",cat:"team",code:"M26-7015",collar:"polo",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-7015 copy.jpg"},
+  {id:"t50",cat:"team",code:"M26-8001",collar:"pokvtud",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-8001 V3 copy.jpg"},
+  {id:"t51",cat:"team",code:"M26-8001",collar:"pokvtud",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-8001 V4 copy.jpg"},
+  {id:"t52",cat:"team",code:"M26-8015",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-8015 V2 copy.jpg"},
+  {id:"t53",cat:"team",code:"M26-8016",collar:"round",sleeve:"long",shoulder:"normal",price:130000,img:"Img/ORDER/Team Jersey/M26-8016 copy.jpg"},
+  {id:"t54",cat:"team",code:"M26-8019",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Team Jersey/M26-8019 copy.jpg"},
+  {id:"t55",cat:"team",code:"M26-8020",collar:"fivelieam",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Team Jersey/M26-8020 copy.jpg"},
+  {id:"t57",cat:"sport",code:"M26-2010",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8010 copy.jpg"},
+  {id:"t58",cat:"sport",code:"M26-8012",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8012 copy.jpg"},
+  {id:"s1",cat:"sport",code:"K26-6021",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/K26-6021 copy.jpg"},
+  {id:"s2",cat:"sport",code:"K26-7011",collar:"pokvtud",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Sport Jersey/K26-7011 copy.jpg"},
+  {id:"s3",cat:"sport",code:"K26-7011",collar:"pokvtud",sleeve:"short",shoulder:"normal",price:130000,img:"Img/ORDER/Sport Jersey/K26-7011 V2 copy.jpg"},
+  {id:"s4",cat:"sport",code:"K26-7011",collar:"pokvtud",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Sport Jersey/K26-7011 V3 copy.jpg"},
+  {id:"s5",cat:"sport",code:"K26-7011",collar:"pokvtud",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Sport Jersey/K26-7011 V5 copy.jpg"},
+  {id:"s6",cat:"sport",code:"M26-5030",collar:"polo",sleeve:"long",shoulder:"normal",price:150000,img:"Img/ORDER/Sport Jersey/M26-5030 copy.jpg"},
+  {id:"s7",cat:"sport",code:"M26-6004",collar:"polo",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-6004 copy.jpg"},
+  {id:"t50",cat:"sport",code:"M26-6008",collar:"vneck",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Sport Jersey/M26-6008 copy.jpg"},
+  {id:"t57",cat:"sport",code:"M26-8003",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8003 copy.jpg"},
+  {id:"t58",cat:"sport",code:"M26-8004",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8004 copy.jpg"},
+  {id:"t59",cat:"sport",code:"M26-8005",collar:"vpok",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8005 copy.jpg"},
+  {id:"s8",cat:"sport",code:"M26-8006",collar:"round",sleeve:"short",shoulder:"slope",price:110000,img:"Img/ORDER/Sport Jersey/M26-8006 copy.jpg"},
+  {id:"s9",cat:"sport",code:"M26-8007",collar:"vneck",sleeve:"short",shoulder:"normal",price:110000,img:"Img/ORDER/Sport Jersey/M26-8007 copy.jpg"},
+  {id:"s10",cat:"sport",code:"M26-8011",collar:"pokvtud",sleeve:"short",shoulder:"slope",price:130000,img:"Img/ORDER/Sport Jersey/M26-8011 copy.jpg"},
+  {id:"p1",cat:"screen",code:"M26-5015",collar:"round",sleeve:"short",shoulder:"normal",price:225000,img:"Img/ORDER/Screen/M26-5015 copy.jpg"},
+  {id:"p2",cat:"screen",code:"M26-5015",collar:"round",sleeve:"short",shoulder:"normal",price:225000,img:"Img/ORDER/Screen/M26-5015 V2 copy.jpg"},
+  {id:"p3",cat:"screen",code:"M26-8013",collar:"round",sleeve:"short",shoulder:"normal",price:225000,img:"Img/ORDER/Screen/M26-8013 copy.jpg"},
+  {id:"g1",cat:"pants",code:"M26-6020",leg:"short",price:90000,img:"Img/ORDER/Pant/M26-6020 short copy.jpg"},
+  {id:"g2",cat:"pants",code:"M26-6024",leg:"short",price:90000,img:"Img/ORDER/Pant/M26-6024 SONG copy.jpg"},
+  {id:"st1",cat:"sticker",code:"1",price:180000,img:"Img/ORDER/Sticker/1 copy.jpg"},
+  {id:"st2",cat:"sticker",code:"2",price:180000,img:"Img/ORDER/Sticker/2 copy.jpg"},
+  {id:"st3",cat:"sticker",code:"4",price:180000,img:"Img/ORDER/Sticker/4 copy.jpg"},
+  {id:"st4",cat:"sticker",code:"5",price:180000,img:"Img/ORDER/Sticker/5 copy.jpg"},
+  {id:"st5",cat:"sticker",code:"6",price:180000,img:"Img/ORDER/Sticker/6 copy.jpg"},
+  {id:"st6",cat:"sticker",code:"7",price:180000,img:"Img/ORDER/Sticker/7 copy.jpg"},
+  {id:"f1",cat:"fabric",code:"....",price:110000,img:"Img/Texture/micro.jpeg"},
+  {id:"f2",cat:"fabric",code:"...",price:110000,img:"Img/Texture/corn.jpeg"},
+  {id:"f3",cat:"fabric",code:"...",price:110000,img:"Img/Texture/dry tech.jpeg"},
+  {id:"f4",cat:"fabric",code:"...",price:110000,img:"Img/Texture/honey.jpeg"},
+  {id:"f5",cat:"fabric",code:"...",price:110000,img:"Img/Texture/rice.jpeg"},
+  {id:"f6",cat:"fabric",code:"...",price:110000,img:"Img/Texture/wire mesh.jpeg"}
 ];
 /* @ADMIN:PRODUCTS:END */
 
@@ -610,6 +850,42 @@ function formatPrice(p){
 let lang = "la";
 let activeCat = "all";
 let currentProduct = null;
+let sortOrder = "newest";
+let searchQuery = "";
+
+/* ---------- thumbnail helper ----------
+   รูปพรีวิวจะโหลดจากโฟลเดอร์ Img/THUMB/ (ขนาดไม่เกิน 1000x1000px)
+   โดยใช้ path เดียวกับรูปเต็ม แค่สลับ "Img/" เป็น "Img/THUMB/"
+   ถ้าไม่มีไฟล์ thumbnail อยู่จริง ระบบจะโหลดรูปเต็มแทนอัตโนมัติ (ผ่าน onerror)
+   ดูสคริปต์สร้างไฟล์ thumbnail ได้ที่ make_thumbnails.py ที่แนบมาให้
+------------------------------------ */
+function thumbUrl(imgPath){
+  if(!imgPath) return imgPath;
+  if(/^https?:\/\//i.test(imgPath)) return imgPath; // ลิงก์ภายนอก ไม่ต้องสลับ path
+  return imgPath.replace(/^Img\//, "Img/THUMB/");
+}
+
+/* ---------- แกะรหัสสินค้าเป็น ปี/เดือน/ลำดับ ----------
+   รูปแบบ: M26-8001 -> 26 = ปี(2026), 8 = เดือน, 001 = ลำดับออเดอร์ในเดือนนั้น
+   เดือน 10-12 รองรับแบบ 2 หลัก เช่น M26-10005
+------------------------------------ */
+function parseCode(code){
+  if(!code) return null;
+  const m = /^[A-Za-z]+(\d{2})\d*-(\d{3,5})$/.exec(code.trim());
+  if(!m) return null;
+  const year = parseInt(m[1],10);
+  const rest = m[2];
+  let month, seq;
+  if(rest.length >= 5){
+    month = parseInt(rest.slice(0,2),10);
+    seq = parseInt(rest.slice(2),10);
+  } else {
+    month = parseInt(rest.slice(0,1),10);
+    seq = parseInt(rest.slice(1),10);
+  }
+  if(month < 1 || month > 12) return null;
+  return {year, month, seq, key: year*100000 + month*1000 + seq};
+}
 
 function shirtSvg(cat, code){
   const [c1,c2] = CAT_COLORS[cat];
@@ -646,11 +922,55 @@ function handleImgError(imgEl, cat, code){
   wrap.innerHTML = cat === "sticker" ? stickerSvg(cat, code) : shirtSvg(cat, code);
 }
 
-function productArt(p, code){
+function productArt(p, code, opts={}){
   if(p.img){
-    return `<img src="${p.img}" alt="${p.code}" loading="lazy" onerror="handleImgError(this,'${p.cat}','${code}')">`;
+    const useThumb = opts.thumb;
+    const url = useThumb ? thumbUrl(p.img) : p.img;
+    // การ์ดในหน้ารายการ (useThumb=true, opts.eager ไม่ true) จะยังไม่ใส่ src
+    // แต่ใส่ data-src ไว้แทน แล้วให้ IntersectionObserver เป็นคนสั่งโหลดรูป
+    // เฉพาะตอนที่การ์ดนั้นเลื่อนเข้าใกล้จอ (ดูฟังก์ชัน setupImgObserver)
+    const deferLoad = useThumb && !opts.eager;
+    const priority = opts.eager ? ' fetchpriority="high"' : ' fetchpriority="low"';
+    const loadingAttr = opts.eager ? ' loading="eager"' : (deferLoad ? '' : ' loading="lazy"');
+    const srcAttr = deferLoad ? `data-src="${url}"` : `src="${url}"`;
+    // ถ้าโหลด thumbnail ไม่สำเร็จ ให้ลองโหลดรูปเต็มก่อนค่อยตกไปเป็นไอคอน SVG
+    const fallback = useThumb
+      ? `if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${p.img}';}else{handleImgError(this,'${p.cat}','${code}')}`
+      : `handleImgError(this,'${p.cat}','${code}')`;
+    return `<img ${srcAttr} alt="${p.code}"${loadingAttr}${priority} decoding="async" width="500" height="500" onerror="${fallback}">`;
   }
   return p.cat === "sticker" ? stickerSvg(p.cat, code) : shirtSvg(p.cat, code);
+}
+
+/* ---------- โหลดรูปตามลำดับที่เห็นบนจอ ----------
+   การ์ดที่อยู่ในจอ (หรือใกล้จะเลื่อนถึง) เท่านั้นที่จะเริ่มโหลดรูป
+   ส่วนที่เหลือรอจนกว่าผู้ใช้จะเลื่อนเข้าใกล้ค่อยเริ่มโหลด ไม่โหลดทั้งหมดพร้อมกัน
+------------------------------------ */
+let imgObserver = null;
+
+function loadDeferredImg(img){
+  const src = img.dataset.src;
+  if(!src) return;
+  img.src = src;
+  img.removeAttribute("data-src");
+}
+
+function setupImgObserver(){
+  if(!("IntersectionObserver" in window)){
+    // เบราว์เซอร์เก่าที่ไม่รองรับ: โหลดทุกรูปทันทีไปเลย
+    document.querySelectorAll("img[data-src]").forEach(loadDeferredImg);
+    return;
+  }
+  if(imgObserver) imgObserver.disconnect();
+  imgObserver = new IntersectionObserver((entries, observer)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        loadDeferredImg(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { root:null, rootMargin:"500px 0px", threshold:0.01 });
+  document.querySelectorAll("img[data-src]").forEach(img=>imgObserver.observe(img));
 }
 
 function cardMeta(p){
@@ -680,16 +1000,12 @@ function renderNav(){
   });
 }
 
-function renderGrid(){
-  document.getElementById("catTitle").textContent = catLabel(activeCat);
-  const items = activeCat === "all" ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
-  document.getElementById("catCount").textContent = `${items.length} ${t("itemsCount")}`;
-  const grid = document.getElementById("productGrid");
-  grid.innerHTML = items.map(p=>`
+function cardHtml(p){
+  return `
     <article class="card" tabindex="0" data-id="${p.id}">
       <div class="hole"></div>
       <div class="card-art" style="background:linear-gradient(160deg,${CAT_COLORS[p.cat][0]}22,${CAT_COLORS[p.cat][1]}22)">
-        ${productArt(p,p.code)}
+        ${productArt(p,p.code,{thumb:true})}
       </div>
       <span class="code">${p.code}</span>
       <h3>${NAME_TR[p.id][lang]}</h3>
@@ -697,7 +1013,56 @@ function renderGrid(){
       <div class="price">${formatPrice(p)}</div>
       <button class="view-btn">${t("viewDetail")}</button>
     </article>
-  `).join("");
+  `;
+}
+
+function sortItems(items){
+  const withDate = [];
+  const withoutDate = [];
+  items.forEach(p=>{
+    const parsed = parseCode(p.code);
+    if(parsed) withDate.push({p, parsed});
+    else withoutDate.push({p, parsed:null});
+  });
+  withDate.sort((a,b)=> sortOrder==="newest" ? b.parsed.key - a.parsed.key : a.parsed.key - b.parsed.key);
+  return withDate.concat(withoutDate);
+}
+
+function renderGrid(){
+  document.getElementById("catTitle").textContent = catLabel(activeCat);
+
+  let items = activeCat === "all" ? PRODUCTS.slice() : PRODUCTS.filter(p=>p.cat===activeCat);
+  if(searchQuery){
+    items = items.filter(p=>p.code.toLowerCase().includes(searchQuery));
+  }
+
+  document.getElementById("catCount").textContent = `${items.length} ${t("itemsCount")}`;
+
+  const sorted = sortItems(items);
+  const grid = document.getElementById("productGrid");
+
+  if(sorted.length === 0){
+    grid.innerHTML = `<div class="no-results">${t("noResults")}</div>`;
+    return;
+  }
+
+  let html = "";
+  let lastKey = null;
+  sorted.forEach(({p, parsed})=>{
+    const groupKey = parsed ? `${parsed.year}-${parsed.month}` : "other";
+    if(groupKey !== lastKey){
+      lastKey = groupKey;
+      const label = parsed
+        ? `${t("monthNames")[parsed.month]} 20${parsed.year}`
+        : t("otherMonth");
+      html += `<div class="month-header">${label}</div>`;
+    }
+    html += cardHtml(p);
+  });
+  grid.innerHTML = html;
+
+  setupImgObserver();
+
   grid.querySelectorAll(".card").forEach(card=>{
     const open = ()=>openModal(card.dataset.id);
     card.addEventListener("click",open);
@@ -724,7 +1089,7 @@ function openModal(id){
   const p = PRODUCTS.find(x=>x.id===id);
   currentProduct = p;
   document.getElementById("modalArt").style.background = `linear-gradient(160deg,${CAT_COLORS[p.cat][0]}22,${CAT_COLORS[p.cat][1]}22)`;
-  document.getElementById("modalArt").innerHTML = productArt(p,p.code+"-m");
+  document.getElementById("modalArt").innerHTML = productArt(p,p.code+"-m",{eager:true});
   document.getElementById("modalCode").textContent = p.code;
   document.getElementById("modalName").textContent = NAME_TR[p.id][lang];
   document.getElementById("specBody").innerHTML = specRows(p).map(([k,v])=>
@@ -732,7 +1097,6 @@ function openModal(id){
   ).join("");
   const waMsg = encodeURIComponent(`สนใจสั่ง ${NAME_TR[p.id][lang]} (${p.code})`);
   document.getElementById("modalWa").href = `${CONTACT.whatsapp}?text=${waMsg}`;
-  document.getElementById("modalWa2").href = `${CONTACT.whatsapp2}?text=${waMsg}`;
   document.getElementById("modalFb").href = CONTACT.facebook;
   document.getElementById("modalOverlay").classList.add("open");
 }
@@ -745,13 +1109,15 @@ function applyStaticText(){
   document.getElementById("logoSub").textContent = t("logoSub");
   document.title = `Alphaprint — ${t("logoSub")}`;
   document.getElementById("heroWa").href = CONTACT.whatsapp;
-  document.getElementById("heroWa2").href = CONTACT.whatsapp2;
   document.getElementById("floatWa").href = CONTACT.whatsapp;
-  document.getElementById("floatWa2").href = CONTACT.whatsapp2;
   document.getElementById("floatFb").href = CONTACT.facebook;
   document.getElementById("modalFb").href = CONTACT.facebook;
   document.getElementById("footerAddressText").textContent = CONTACT.address;
   document.documentElement.lang = lang === "en" ? "en" : (lang === "la" ? "lo" : "th");
+  document.getElementById("searchInput").placeholder = t("searchPlaceholder");
+  const sortSel = document.getElementById("sortSelect");
+  sortSel.options[0].textContent = t("sortNewest");
+  sortSel.options[1].textContent = t("sortOldest");
 }
 
 function setLang(l){
@@ -774,6 +1140,29 @@ document.getElementById("ctaBrowse").addEventListener("click",()=>{
   renderGrid();
 });
 
+/* ---------- ค้นหาด้วยรหัสสินค้า ---------- */
+const searchInput = document.getElementById("searchInput");
+const searchBox = document.getElementById("searchBox");
+const searchClear = document.getElementById("searchClear");
+searchInput.addEventListener("input",()=>{
+  searchQuery = searchInput.value.trim().toLowerCase();
+  searchBox.classList.toggle("has-value", searchQuery.length>0);
+  renderGrid();
+});
+searchClear.addEventListener("click",()=>{
+  searchInput.value = "";
+  searchQuery = "";
+  searchBox.classList.remove("has-value");
+  renderGrid();
+  searchInput.focus();
+});
+
+/* ---------- เรียงลำดับ ---------- */
+document.getElementById("sortSelect").addEventListener("change",e=>{
+  sortOrder = e.target.value;
+  renderGrid();
+});
+
 document.getElementById("modalClose").addEventListener("click",()=>{
   document.getElementById("modalOverlay").classList.remove("open");
 });
@@ -791,7 +1180,7 @@ document.addEventListener("keydown",e=>{
 function openFullscreen(){
   if(!currentProduct) return;
   const p = currentProduct;
-  document.getElementById("fsArt").innerHTML = productArt(p, p.code+"-fs");
+  document.getElementById("fsArt").innerHTML = productArt(p, p.code+"-fs",{eager:true});
   document.getElementById("fsCaption").textContent = `${NAME_TR[p.id][lang]} — ${p.code}`;
   document.getElementById("fsOverlay").classList.add("open");
 }
